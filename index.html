@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Днепро паблик</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=IBM+Plex+Mono:wght@500&family=PT+Sans:wght@400;700&family=Russo+One&display=swap">
+<style>
+/* Layout: одна колонка 960px, шапка-ссылки, герой с карточкой подключения справа, стикер с VIP, список правил, блок для админов.
+   Фон в клетку швов как у панельки. Везде чуть кривовато, как будто вёрстку делал человек. */
+:root{
+  --bg:#d8dcdd;
+  --surface:#e8ebeb;
+  --fg:#1c2226;
+  --muted:#566067;
+  --line:#a3acb0;
+  --accent:#f0a30a;
+  --accent-ink:#8a4f00;
+  --on-accent:#1c1608;
+  --river:#1f6f93;
+  --seam:rgba(28,34,38,.08);
+  --shadow:rgba(28,34,38,.28);
+  --note:#f3d96b;
+  --note-ink:#2b2410;
+  --display:'Russo One',Impact,'Arial Black',sans-serif;
+  --body:'PT Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --hand:'Caveat','Segoe Script','Comic Sans MS',cursive;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#171b1f;
+    --surface:#20262b;
+    --fg:#e4e1d6;
+    --muted:#98a1a6;
+    --line:#39424a;
+    --accent-ink:#f0a30a;
+    --river:#5ab4d8;
+    --seam:rgba(255,255,255,.045);
+    --shadow:rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171b1f;
+  --surface:#20262b;
+  --fg:#e4e1d6;
+  --muted:#98a1a6;
+  --line:#39424a;
+  --accent-ink:#f0a30a;
+  --river:#5ab4d8;
+  --seam:rgba(255,255,255,.045);
+  --shadow:rgba(0,0,0,.5);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background-color:var(--bg);
+  background-image:
+    linear-gradient(var(--seam) 2px,transparent 2px),
+    linear-gradient(90deg,var(--seam) 2px,transparent 2px);
+  background-size:260px 170px;
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:20px 56px;
+}
+.wrap{max-width:960px;margin:0 auto}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--river);outline-offset:3px}
+
+/* шапка */
+.top{display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline;justify-content:space-between;padding-bottom:12px;border-bottom:3px solid var(--fg)}
+.top .logo{font-family:var(--display);font-size:18px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
+.top nav{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:16px}
+.top nav a{text-decoration-thickness:2px;text-underline-offset:4px}
+
+/* герой */
+.hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;padding-block:44px 20px;align-items:start}
+h1{margin:0;font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(46px,11vw,100px);line-height:.9;letter-spacing:-.01em}
+h1 .w1{display:block}
+h1 .w2{position:relative;display:inline-block;margin-top:6px;margin-left:10px;text-transform:lowercase;color:var(--accent-ink);transform:rotate(-2.5deg);transform-origin:left bottom}
+h1 .w2 svg{position:absolute;left:-2%;bottom:-.16em;width:104%;height:.22em;overflow:visible}
+.lead{margin:26px 0 0;max-width:34em;font-size:19px}
+.maker{margin:22px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.maker span{font-size:14px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.maker b{font-family:var(--hand);font-weight:600;font-size:38px;line-height:1;transform:rotate(-1.5deg);display:inline-block}
+
+.maker2{margin:14px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.maker2 span{font-size:14px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.maker2 code{font-family:var(--mono);font-size:16px;padding:4px 8px;background:var(--surface);border:1px solid var(--line);overflow-wrap:anywhere}
+
+/* карточка подключения */
+.connect{position:relative;background:var(--surface);border:2px dashed var(--fg);padding:22px 20px 20px;transform:rotate(.7deg);margin-top:30px}
+.connect .hint{position:absolute;right:10px;top:-42px;font-family:var(--hand);font-weight:600;font-size:25px;line-height:1;transform:rotate(3deg);display:flex;align-items:flex-end;gap:4px;color:var(--fg)}
+.connect .hint svg{width:34px;height:34px;flex:none;color:var(--fg)}
+.label{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:6px}
+.ip{margin:0;font-family:var(--mono);font-weight:500;font-size:clamp(19px,5.2vw,28px);line-height:1.2;overflow-wrap:anywhere}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;align-items:center}
+.btn{display:inline-block;font-family:var(--display);font-size:15px;line-height:1.1;padding:11px 16px;border:2px solid var(--fg);background:var(--accent);color:var(--on-accent);box-shadow:3px 3px 0 var(--fg);cursor:pointer;text-decoration:none;border-radius:0}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--fg)}
+.btn.alt{background:transparent;color:var(--fg)}
+.btn.small{font-size:13px;padding:7px 11px;box-shadow:2px 2px 0 var(--fg)}
+.console{margin-top:22px;padding-top:16px;border-top:1px dashed var(--line)}
+.console p{margin:0 0 8px;font-size:15px;color:var(--muted)}
+.console code{display:block;font-family:var(--mono);font-size:15px;padding:9px 11px;background:var(--bg);border:1px solid var(--line);overflow-wrap:anywhere}
+.console .row{margin-top:10px}
+.dc-url{font-family:var(--mono);font-size:14px;color:var(--muted);overflow-wrap:anywhere}
+
+/* стикер */
+.vip{padding-block:36px 10px}
+.note{position:relative;display:inline-block;max-width:540px;background:var(--note);color:var(--note-ink);padding:26px 28px 22px;transform:rotate(-1.4deg);box-shadow:5px 7px 0 var(--shadow);margin-left:clamp(0px,4vw,48px)}
+.note::before{content:"";position:absolute;left:38%;top:-13px;width:96px;height:26px;background:rgba(255,255,255,.55);transform:rotate(3deg)}
+.note .big{display:block;font-family:var(--hand);font-weight:600;font-size:clamp(30px,6.4vw,42px);line-height:1.05;text-wrap:balance}
+.note .small{display:block;margin-top:10px;font-size:15px}
+
+/* разделы */
+section{padding-block:44px 0}
+h2{margin:0 0 6px;font-family:var(--display);font-weight:400;font-size:clamp(30px,6vw,42px);text-transform:uppercase;line-height:1;text-wrap:balance}
+.sub{margin:0 0 22px;font-family:var(--hand);font-weight:600;font-size:26px;color:var(--muted);transform:rotate(-.8deg);transform-origin:left}
+
+ol.rules{list-style:none;margin:0;padding:0;max-width:720px;counter-reset:r}
+ol.rules li{counter-increment:r;display:grid;grid-template-columns:46px minmax(0,1fr);gap:0 6px;padding:12px 0;border-bottom:1px dashed var(--line)}
+ol.rules li::before{content:counter(r);font-family:var(--display);font-size:22px;line-height:1.3;color:var(--accent-ink)}
+ol.rules b{font-weight:700}
+
+.penalties{margin-top:32px;max-width:720px;background:var(--surface);border:2px solid var(--fg);padding:20px 22px;box-shadow:5px 5px 0 var(--fg)}
+.penalties h3{margin:0 0 10px;font-family:var(--display);font-weight:400;font-size:21px;text-transform:uppercase}
+.penalties ul{margin:0;padding-left:20px;display:grid;gap:8px}
+.change{margin:20px 0 0;max-width:720px;font-family:var(--hand);font-weight:600;font-size:26px;line-height:1.15;transform:rotate(-.6deg);transform-origin:left}
+
+.adm-note{margin:0 0 24px;max-width:720px;font-weight:700}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 44px}
+.cols h3{margin:0 0 10px;font-family:var(--display);font-weight:400;font-size:19px;text-transform:uppercase;letter-spacing:.03em}
+.cols ul{margin:0;padding-left:20px;display:grid;gap:8px}
+.adm-foot{margin:26px 0 0;max-width:720px;color:var(--muted);font-size:16px}
+
+footer{margin-top:64px;padding-top:16px;border-top:3px solid var(--fg);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:15px;color:var(--muted)}
+footer .hand{font-family:var(--hand);font-weight:600;font-size:24px;color:var(--fg)}
+
+@media (max-width:780px){
+  .hero{grid-template-columns:minmax(0,1fr);gap:20px;padding-top:32px}
+  .cols{grid-template-columns:minmax(0,1fr)}
+  .connect{margin-top:42px}
+  .note{margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="#top">Днепро паблик</a>
+    <nav>
+      <a href="#rules">Правила</a>
+      <a href="https://discord.gg/MFQhC5fGp" target="_blank" rel="noopener">Discord</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div>
+        <h1>
+          <span class="w1">Днепро</span>
+          <span class="w2">паблик<svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 13 C 55 3, 110 19, 170 9 S 265 13, 297 5" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/></svg></span>
+        </h1>
+        <p class="lead">Паблик по Counter-Strike: Source. Заходи поиграть и поболтать в голосовом. Правила ниже, прочитай их до того, как включишь микрофон.</p>
+        <p class="maker"><span>Создатель</span> <b>дед матвей</b></p>
+        <p class="maker2"><span>Discord создателя</span> <code id="mat">ded_matvey_1_34262</code> <button class="btn alt small" type="button" data-copy="#mat">Скопировать</button></p>
+      </div>
+
+      <div class="connect">
+        <div class="hint" aria-hidden="true">копируй и заходи
+          <svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M26 3 C 30 14, 20 22, 8 26"/><path d="M8 26 L 15 21"/><path d="M8 26 L 13 32"/></svg>
+        </div>
+        <span class="label">IP сервера</span>
+        <p class="ip" id="ip">193.34.212.139:27017</p>
+        <div class="row">
+          <button class="btn" type="button" data-copy="#ip" id="copy-ip">Скопировать IP</button>
+          <a class="btn alt" href="https://discord.gg/MFQhC5fGp" target="_blank" rel="noopener">Наш Discord</a>
+        </div>
+        <div class="console">
+          <p>Или открой консоль в игре (клавиша ~) и вставь:</p>
+          <code id="cmd">connect 193.34.212.139:27017</code>
+          <div class="row">
+            <button class="btn alt small" type="button" data-copy="#cmd">Скопировать команду</button>
+            <span class="dc-url">discord.gg/MFQhC5fGp</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vip">
+      <div class="note">
+        <span class="big">Девушкам с микрофоном — VIP бесплатно</span>
+        <span class="small">Как получить, спроси в Discord.</span>
+      </div>
+    </div>
+
+    <section id="rules">
+      <h2>Правила</h2>
+      <p class="sub">прочитай, пожалуйста</p>
+      <ol class="rules">
+        <li><span><b>Мат не запрещён, но не приветствуется.</b> Не забывай, играют девушки и дети.</span></li>
+        <li><span>Нельзя оскорблять и игнорировать администрацию, отказываться от проверки (мут или бан).</span></li>
+        <li><span>Нельзя оскорблять игроков, их родных и близких, буллить и провоцировать конфликты. <b>За это могут выдать мут или бан без предупреждения.</b></span></li>
+        <li><span>Не провоцируй админов на нарушение правил, вроде «забань меня» и тому подобного.</span></li>
+        <li><span>Запрещены банихоп (больше 2 прыжков), макросы, читы, скрипты, алиасы и замена текстур, то есть всё, что даёт преимущество над другими игроками.</span></li>
+        <li><span>Совсем малышам тоже могут выдать мут за неадекватность в микрофон.</span></li>
+        <li><span>Любая реклама других ресурсов запрещена: серверов, сайтов, ссылок, проектов и так далее.</span></li>
+        <li><span>Нельзя использовать ники админов и ники, некорректные с точки зрения администратора.</span></li>
+        <li><span>Нельзя общаться в голосовом чате с неисправным микрофоном и выдавать себя за админа.</span></li>
+        <li><span>Нельзя следить за другими игроками (мониторить) после смерти своего персонажа.</span></li>
+        <li><span>Нельзя любыми способами мешать игровому процессу: влезать на текстуры, использовать баги карты и прочее.</span></li>
+        <li><span>Нельзя по сговору с друзьями вотебанить других игроков «по приколу». <b>Бан на 1–7 дней.</b></span></li>
+        <li><span>Спреи с порно запрещены. Эротику можно.</span></li>
+        <li><span>Нельзя спамить в микрофон и в чат.</span></li>
+        <li><span>Вызов на проверку только через админку, а не в микрофон и чат.</span></li>
+      </ol>
+
+      <div class="penalties">
+        <h3>Что за это бывает</h3>
+        <ul>
+          <li>Игнорирование админа при нарушениях со стороны игрока: бан на усмотрение админа.</li>
+          <li>Отказ от проверки: бан от 1 дня. Если с оскорблениями, то 7 дней.</li>
+          <li>Оскорбление и мат, если это необоснованно и не рофл: мут голосового или текстового чата, срок на усмотрение админа.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>Днепро паблик · Counter-Strike: Source</span>
+    <span class="hand">до встречи на сервере</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  function fallbackSelect(el){
+    try{
+      var r=document.createRange();r.selectNodeContents(el);
+      var s=window.getSelection();s.removeAllRanges();s.addRange(r);
+    }catch(e){}
+  }
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    var original=btn.textContent;
+    btn.addEventListener('click',function(){
+      var el=document.querySelector(btn.getAttribute('data-copy'));
+      if(!el)return;
+      var text=el.textContent.trim();
+      function done(msg){
+        btn.textContent=msg;
+        setTimeout(function(){btn.textContent=original},1800);
+      }
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){done('Скопировано')},function(){
+          fallbackSelect(el);done('Выделено, жми Ctrl+C');
+        });
+      }else{
+        fallbackSelect(el);done('Выделено, жми Ctrl+C');
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
